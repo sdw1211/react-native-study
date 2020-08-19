@@ -1,14 +1,12 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { TextInput, StyleSheet, Button, View } from 'react-native';
+import TodoContenxt from './../context/TodoContext';
 
-interface Props{
-  onChange: (value: string) => void
-}
-
-function TodoInputView({onChange}: Props): JSX.Element {
+function TodoInputView(): JSX.Element {
   const [value, setValue] = useState('');
+  const context = useContext(TodoContenxt);
   const addTodo = useCallback(() => {
-    onChange(value);
+    context.insertTodo({todo: value});
     setValue('');
   }, [value]);
 
